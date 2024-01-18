@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
-
-const URL = "http://localhost:3000";
-
+// import "./types/index.d.ts"
+// import "./index.d.ts";
+// const URL = "https://webrtc-backend-hvws.onrender.com";
+const URL = "http://localhost:5000";
 export const Room = ({
     name,
     localAudioTrack,
@@ -82,6 +83,7 @@ export const Room = ({
             setRemoteMediaStream(stream);
             // trickle ice 
             setReceivingPc(pc);
+
             window.pcr = pc;
             pc.ontrack = (e) => {
                 alert("ontrack");
@@ -201,9 +203,10 @@ export const Room = ({
 
     return <div>
         Hi {name}
-        <video autoPlay width={400} height={400} ref={localVideoRef} />
-        {lobby ? "Waiting to connect you to someone" : null}
-        <video autoPlay width={400} height={400} ref={remoteVideoRef} />
+        <video autoPlay width={400} height={400} ref={localVideoRef as React.RefObject<HTMLVideoElement>} />
+{lobby ? "Waiting to connect you to someone" : null}
+<video autoPlay width={400} height={400} ref={remoteVideoRef as React.RefObject<HTMLVideoElement>} />
+
     </div>
 }
 
