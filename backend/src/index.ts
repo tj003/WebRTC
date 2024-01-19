@@ -25,9 +25,9 @@ io.on('connection', (socket: Socket) => {
   })
 });
 
-// server.listen(5000, () => {
-//     console.log('listening on *:5000');
-// });
-server.listen("https://webrtc-backend-hvws.onrender.com", () => {
+server.listen(5000, () => {
     console.log('listening on *:5000');
 });
+// server.listen("https://webrtc-backend-hvws.onrender.com", () => {
+//     console.log('listening on *:5000');
+// });
