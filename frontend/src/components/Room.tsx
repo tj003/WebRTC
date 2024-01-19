@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 import { Socket, io } from "socket.io-client";
 // import "./types/index.d.ts"
 // import "./index.d.ts";
@@ -18,14 +18,14 @@ export const Room = ({
     localAudioTrack: MediaStreamTrack | null,
     localVideoTrack: MediaStreamTrack | null,
 }) => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
     const [lobby, setLobby] = useState(true);
-    const [socket, setSocket] = useState<null | Socket>(null);
-    const [sendingPc, setSendingPc] = useState<null | RTCPeerConnection>(null);
-    const [receivingPc, setReceivingPc] = useState<null | RTCPeerConnection>(null);
-    const [remoteVideoTrack, setRemoteVideoTrack] = useState<MediaStreamTrack | null>(null);
-    const [remoteAudioTrack, setRemoteAudioTrack] = useState<MediaStreamTrack | null>(null);
-    const [remoteMediaStream, setRemoteMediaStream] = useState<MediaStream | null>(null);
+    const [, setSocket] = useState<null | Socket>(null);
+    const [, setSendingPc] = useState<null | RTCPeerConnection>(null);
+    const [, setReceivingPc] = useState<null | RTCPeerConnection>(null);
+    const [, setRemoteVideoTrack] = useState<MediaStreamTrack | null>(null);
+    const [, setRemoteAudioTrack] = useState<MediaStreamTrack | null>(null);
+    const [, setRemoteMediaStream] = useState<MediaStream | null>(null);
     const remoteVideoRef = useRef<HTMLVideoElement>();
     const localVideoRef = useRef<HTMLVideoElement>();
 
@@ -89,22 +89,22 @@ export const Room = ({
             setReceivingPc(pc);
 
             window.pcr = pc;
-            pc.ontrack = (e) => {
-                alert("ontrack");
-                // console.error("inside ontrack");
-                // const {track, type} = e;
-                // if (type == 'audio') {
-                //     // setRemoteAudioTrack(track);
-                //     // @ts-ignore
-                //     remoteVideoRef.current.srcObject.addTrack(track)
-                // } else {
-                //     // setRemoteVideoTrack(track);
-                //     // @ts-ignore
-                //     remoteVideoRef.current.srcObject.addTrack(track)
-                // }
-                // //@ts-ignore
-                // remoteVideoRef.current.play();
-            }
+            // pc.ontrack = (e) => {
+            //     alert("ontrack");
+            //     // console.error("inside ontrack");
+            //     // const {track, type} = e;
+            //     // if (type == 'audio') {
+            //     //     // setRemoteAudioTrack(track);
+            //     //     // @ts-ignore
+            //     //     remoteVideoRef.current.srcObject.addTrack(track)
+            //     // } else {
+            //     //     // setRemoteVideoTrack(track);
+            //     //     // @ts-ignore
+            //     //     remoteVideoRef.current.srcObject.addTrack(track)
+            //     // }
+            //     // //@ts-ignore
+            //     // remoteVideoRef.current.play();
+            // }
 
             pc.onicecandidate = async (e) => {
                 if (!e.candidate) {
@@ -154,7 +154,9 @@ export const Room = ({
             }, 5000)
         });
 
-        socket.on("answer", ({roomId, sdp: remoteSdp}) => {
+        // socket.on("answer", ({roomId, sdp: remoteSdp}) => {
+            socket.on("answer", ({ sdp: remoteSdp}) => {
+
             setLobby(false);
             setSendingPc(pc => {
                 pc?.setRemoteDescription(remoteSdp)
@@ -173,7 +175,7 @@ export const Room = ({
             if (type == "sender") {
                 setReceivingPc(pc => {
                     if (!pc) {
-                        console.error("receicng pc nout found")
+                        console.error("receicng pc not found")
                     } else {
                         console.error(pc.ontrack)
                     }
