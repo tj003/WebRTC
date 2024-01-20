@@ -5,7 +5,7 @@ import { Socket, io } from "socket.io-client";
 // import "./index.d.ts";
 // const URL = "https://webrtc-backend-hvws.onrender.com";
 // <<<<<<< HEAD
-const URL = "https://webrtc-backend-wzoi.onrender.com:5000";
+const URL = "https://webrtc-backend-wzoi.onrender.com";
 // =======
 // const URL = "http://localhost:5000";
 // >>>>>>> 392fdc9661f141ad720131b13b1769b30d3f78c0
