@@ -37,18 +37,25 @@
 import { Socket } from "socket.io";
 import http from "http";
 import express from 'express';
-import { Server } from 'socket.io';
 import { UserManager } from "./managers/UserManger";
 import cors from 'cors';  // Import the cors middleware
 
 const app = express();
 const server = http.createServer(app);  // Pass the 'app' to createServer
 
-const io = new Server(server, {
-  cors: {
-    origin: "*"
-  }
+const socketio = require('socket.io')
+
+const ser = server.listen({ port: 5000},() => {
+  console.log('listening on *:5000');
 });
+const io= socketio(ser ,{origin:'*'});
+// const io = new Server(server, {
+  
+//   cors: {
+//     origin: "*"
+
+//   }
+// });
 
 const userManager = new UserManager();
 
@@ -63,6 +70,6 @@ io.on('connection', (socket: Socket) => {
   })
 });
 
-server.listen(5000, () => {
-  console.log('listening on *:5000');
-});
+// server.listen(5000, () => {
+//   console.log('listening on *:5000');
+// });
