@@ -45,6 +45,10 @@ const server = http.createServer(app);  // Pass the 'app' to createServer
 
 const socketio = require('socket.io')
 
+app.get('/', (req, res) => {
+  res.send('Server is On!!!!!!!!!');
+});
+
 const ser = server.listen({ port: 5000},() => {
   console.log('listening on *:5000');
 });
